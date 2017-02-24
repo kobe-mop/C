@@ -73,3 +73,40 @@ int main()
     delete(base1);
     system("pause");
 }
+
+
+3.1派生类指针到基类指针用隐式类型转换(直接赋值)或者用 static_cast. 显然不应该也没必要用 reinterpret_cast.
+3.2基类指针到派生类指针用 dynamic_cast (运行期检查)或者 static_cast (运行期不检查,由程序员保证正确性). 考虑到C++对象模型的内存分布可能引起的指针偏移问题,绝对不能用 reinterpret_cast.
+3.3static_cast 运算符完成*相关类型*之间的转换. 而 reinterpret_cast 处理*互不相关的类型*之间的转换.
+3.4 void* 到任意类型指针, 用 static_cast 和 reinterpret_cast 都可以,这是由 void* 是通用指针这个语义决定的.我个人倾向用 reinterpret_cast,表达要"重新解释"指针的语义.
+
+3.5 不同类型指针间的相互转换用 reinterpret_cast.
+
+3.6 int 型和指针类型间的相互转换用 reinterpret_cast.
+struct car
+{
+    int doors;
+    int height;
+    int length;
+    float weight; 
+};
+
+int create_car()
+{
+    car *c = new car;
+    return reinterpret_cast<int>(c);
+}
+
+int get_car_doors(int car_id)
+{
+    car *c = reinterpret_cast<car*>(car_id);
+    return c->doors;
+}
+
+void destroy_car(int car_id)
+{
+    car *c = reinterpret_cast<car*>(car_id);
+    delete c;
+}
+
+如上,外部函数不需要知道 struct car 的具体定义,只需要调用 create_car() 得到一个 car id,然后用此 car_id 调用其他相关函数即可,至于 car_id 是什么,根本没必要关心.

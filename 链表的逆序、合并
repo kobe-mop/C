@@ -6,6 +6,7 @@ struct Node{
 void* reverseList(Node *head){  //链表的逆序
 	if(head == NULL || head->next == NULL)
 		return head;
+		
 	Node *p1 = head;
 	Node *p2 = p1->next;
 	Node *p3 = p2->next;

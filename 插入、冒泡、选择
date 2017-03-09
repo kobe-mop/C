@@ -1,0 +1,68 @@
+public class Test{
+	public static void main(String[] args)
+	{
+		int[] arr = {1,5,3,78};
+		printArr(arr);
+		//insert(arr);
+		//select(arr);
+		//bubble(arr);
+		printArr(arr);
+	}
+
+	public static void insert(int[] arr)
+	{
+		for (int i = 1;i<arr.length ;i++ ) {
+			if(arr[i]<arr[i-1])
+			{
+				int temp = arr[i];
+				int j = i-1;
+				for (;j>=0 && temp<arr[j] ; j--) {
+					arr[j+1] = arr[j];
+				}
+				arr[j+1] = temp;
+			}	
+		}
+	}
+
+	public static void bubble(int[] arr)
+	{
+		for (int x=0;x<arr.length-1 ;x++ ) 
+		{
+			for (int y= 0;y<arr.length-x-1 ;y++ ) 
+			{
+				if (arr[y]>arr[y+1]) 
+				{
+					int temp = arr[y];
+					arr[y] = arr[y+1];
+					arr[y+1] = temp;				
+				}	
+			}
+			
+		}
+	}
+
+	public static void select(int[] arr)
+	{
+		for (int x=0;x<arr.length-1 ;x++ ) 
+		{
+			for (int y= x+1;y<arr.length ;y++ ) 
+			{
+				if (arr[y]<arr[x]) 
+				{
+					int temp = arr[y];
+					arr[y] = arr[x];
+					arr[x] = temp;				
+				}	
+			}
+			
+		}
+	}
+
+	public static void printArr(int[] arr){
+		for (int i= 0;i<arr.length-1 ;i++ ) {
+			System.out.print(arr[i]+",");
+		}
+		System.out.println(arr[arr.length-1]);
+	}
+}
+

@@ -3,7 +3,7 @@
 void bubble(int[] arr, int length){
 	for(int i =0; i<length-1; i++)
 	{	
-		BOOL exchange = false;
+		bool exchange = false;
 		for(int j = 0; j<len-i-1; j++)
 		{
 			if(arr[j]>arr[j+1])

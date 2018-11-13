@@ -1,3 +1,4 @@
+//翻转链表
 struct Node{
 	int data;
 	Node *next;
@@ -23,7 +24,48 @@ void* reverseList(Node *head){  //链表的逆序
 	return head;
 }
 
-void* mergeList(Node *head1, Node *head2){//有序链表合并
+//翻转数组
+#include <iostream>
+using namespace std; 
+void reversal(int arr[], int n)
+{
+    int temp;
+ 
+    for(int i=0; i<n/2; i++)
+    {
+        temp = arr[i];
+        arr[i] = arr[n-1-i];
+        arr[n-1-i] = temp;
+    }
+}
+void list(int arr[], int n)
+{
+    for(int i=0; i<n; i++)
+    {
+        cout<<arr[i]<<"  ";
+    }
+    cout<<endl;
+}
+int main() 
+{
+    int arr[] = {78, 86, 90, 83, 74, 68, 74, 80, 69, 79, 89, 93};
+    int n = 12;
+     
+    cout<<"翻转前："<<endl;
+    list(arr, n);
+ 
+    reversal(arr, n);
+ 
+    cout<<"翻转后："<<endl;
+    list(arr, n);
+ 
+    return 0;
+}
+
+
+
+//有序链表合并
+void* mergeList(Node *head1, Node *head2){
 	if(head1 == NULL)
 		return head2;
 	if(head2 == NULL)
@@ -68,7 +110,8 @@ void* mergeList(Node *head1, Node *head2){//有序链表合并
 	return head;	
 }
 
-void* mergeListRecursive(Node *head1, Node *head2){//有序链表递归方法合并
+//有序链表递归方法合并
+void* mergeListRecursive(Node *head1, Node *head2){
 	if(head1 == NULL)
 		return head2;
 	if(head2 == NULL)

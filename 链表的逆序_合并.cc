@@ -1,28 +1,45 @@
 //翻转链表
-struct Node{
-	int data;
-	Node *next;
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+  };
+
+class Solution{
+    public:
+    ListNode* ReverseList(ListNode *head){
+        if(head !=NULL && head->next !=NULL){
+            ListNode *pre = NULL;
+            ListNode *curr = head;
+            ListNode *post = NULL;
+            
+            while (curr)
+            {
+                post = curr->next; //保存curr后面的链表
+                curr->next = pre;  //链表翻转
+                pre = curr;  //pre链表后移
+                curr = post; //curr链表后移
+            }
+            return pre;
+        }
+        else
+            return head;
+
+
+        //递归解法
+        // if(head != NULL && head->next!=NULL){
+        //     ListNode *curr = reverseList(head->next);
+        //     head->next->next = head;
+        //     head->next = NULL;
+        //     return curr;
+        // }
+        // else 
+        //     return head;
+    }
 };
 
-void* reverseList(Node *head){  //链表的逆序
-	if(head == NULL || head->next == NULL)
-		return head;
-		
-	Node *p1 = head;
-	Node *p2 = p1->next;
-	Node *p3 = p2->next;
-	p1->next = NULL;
-	
-	While(p3 != NULL){
-		p2->next = p1;
-		p1 = p2;
-		p2 = p3;
-		p3 = p3->next;
-	}
-	p2->next = p1;
-	head = p2;
-	return head;
-}
+
+
 
 //翻转数组
 #include <iostream>
